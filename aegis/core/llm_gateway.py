@@ -1,4 +1,4 @@
-"""LLM Gateway for Aegis AI core - wraps LiteLLM for provider-agnostic completions (V5)."""
+"""LLM Gateway for Aegis AI core - wraps LiteLLM for provider-agnostic completions."""
 
 from __future__ import annotations
 
