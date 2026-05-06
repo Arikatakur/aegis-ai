@@ -3,16 +3,21 @@
 from aegis import __version__
 
 BANNER = rf"""
-    _          _  ___   ___
-   /_\   ___  (_)/ __| |_ _|
-  / _ \ / -_) | |\__ \  | |
- /_/ \_\\___|_|_||___/ |___|
+[bold red]
+    █████╗ ███████╗ ██████╗ ██╗███████╗
+   ██╔══██╗██╔════╝██╔════╝ ██║██╔════╝
+   ███████║█████╗  ██║  ███╗██║███████╗
+   ██╔══██║██╔══╝  ██║   ██║██║╚════██║
+   ██║  ██║███████╗╚██████╔╝██║███████║
+   ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝╚══════╝
+[/bold red]
 
- Autonomous LLM Red-Teaming Platform
- ────────────────────────────────────────
- v{__version__}  |  Local-first  |  OWASP-mapped
+[bold white]      Autonomous LLM Red-Teaming Platform[/bold white]
+[dim]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/dim]
+[bold red]      v{__version__}[/bold red] [dim]|[/dim] [cyan]Local-first[/cyan]
+[dim]      |[/dim] [magenta]OWASP-mapped[/magenta]
 """
 
 BANNER_SHORT = (
-    f"[bold cyan]Aegis AI[/bold cyan] [dim]v{__version__} | Autonomous LLM Red-Teaming[/dim]"
+    f"[bold red]AEGIS AI[/bold red] [dim]v{__version__} | Autonomous LLM Red-Teaming Platform[/dim]"
 )

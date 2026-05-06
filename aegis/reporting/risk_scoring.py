@@ -47,7 +47,6 @@ class RiskScoring:
         if not validation_results:
             return 0.0
 
-        total_weight = 0.0
         weighted_score = 0.0
 
         for vr in validation_results:
@@ -56,14 +55,9 @@ class RiskScoring:
             confidence = vr.confidence
 
             contribution = severity_weight * status_weight * confidence
-            weight = severity_weight
             weighted_score += contribution
-            total_weight += weight
 
-        if total_weight == 0:
-            return 0.0
-
-        raw_score = (weighted_score / total_weight) * 100
+        raw_score = (weighted_score / len(validation_results)) * 100
         return min(100.0, max(0.0, round(raw_score, 2)))
 
     def get_level(self, score: float) -> str:

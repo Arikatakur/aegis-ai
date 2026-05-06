@@ -1,7 +1,11 @@
-.PHONY: install run mock test lint format typecheck clean
+.PHONY: install sync-version run mock test lint format typecheck clean
 
 install:
 	uv sync --all-extras
+	uv run python scripts/sync_readme_version.py
+
+sync-version:
+	uv run python scripts/sync_readme_version.py
 
 run:
 	uv run aegis run
@@ -13,10 +17,10 @@ test:
 	uv run pytest tests/ -v
 
 lint:
-	uv run ruff check aegis/ tests/
+	uv run ruff check aegis/ tests/ scripts/
 
 format:
-	uv run ruff format aegis/ tests/
+	uv run ruff format aegis/ tests/ scripts/
 
 typecheck:
 	uv run mypy aegis/

@@ -39,9 +39,9 @@
 | Metric | Count |
 |--------|-------|
 | Total Attacks | {{ statistics.total_attacks }} |
-| ✅ Passed | {{ statistics.passed }} |
-| ⚠️ Warnings | {{ statistics.warnings }} |
-| ❌ Failed | {{ statistics.failed }} |
+| Passed | {{ statistics.passed }} |
+| Warnings | {{ statistics.warnings }} |
+| Failed | {{ statistics.failed }} |
 | Total Tokens | {{ token_usage.total_tokens }} |
 | Est. Cost | ${{ "%.4f"|format(estimated_cost) }} |
 
@@ -64,7 +64,7 @@ _No OWASP findings recorded._
 ## Findings
 
 {% for finding in findings %}
-### {% if finding.validation_status == 'FAIL' %}🔴{% elif finding.validation_status == 'WARNING' %}🟡{% else %}🟢{% endif %} [{{ finding.validation_status }}] `{{ finding.attack_id }}`
+### [{{ finding.validation_status }}] `{{ finding.attack_id }}`
 
 **Category:** {{ finding.category }}
 **Agent:** {{ finding.agent }}

@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
+from aegis.agents.base_agent import BaseAgent
 from aegis.core.models import AttackCase
 
 if TYPE_CHECKING:
@@ -76,7 +77,7 @@ class AttackPlanner:
         logger.info("Attack plan: %d total cases (mode=%s)", len(all_cases), mode)
         return all_cases
 
-    def _instantiate_agent(self, class_name: str) -> object:
+    def _instantiate_agent(self, class_name: str) -> BaseAgent:
         """Dynamically import and instantiate an agent by class name."""
         import importlib
 
@@ -103,4 +104,4 @@ class AttackPlanner:
         module_path, cls_name = module_map[class_name]
         module = importlib.import_module(module_path)
         cls = getattr(module, cls_name)
-        return cls(context=self.context)
+        return cast(BaseAgent, cls(context=self.context))

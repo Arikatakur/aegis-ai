@@ -206,9 +206,9 @@ def _export_markdown_plain(report_data: dict[str, Any], path: Path) -> None:
 
     for f in report_data.get("findings", []):
         status = f.get("validation_status", "UNKNOWN")
-        emoji = {"FAIL": "🔴", "WARNING": "🟡", "PASS": "🟢"}.get(status, "⚪")
+        status_label = {"FAIL": "FAIL", "WARNING": "WARNING", "PASS": "PASS"}.get(status, "UNKNOWN")
         lines += [
-            f"### {emoji} [{status}] `{f.get('attack_id', '')}`",
+            f"### [{status_label}] `{f.get('attack_id', '')}`",
             "",
             f"**Category:** {f.get('category', '')}  ",
             f"**Agent:** {f.get('agent', '')}  ",

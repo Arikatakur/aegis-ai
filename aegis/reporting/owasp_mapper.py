@@ -2,6 +2,21 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
+from typing import TypedDict
+
+from aegis.core.models import ValidationResult
+
+
+class OWASPSummary(TypedDict):
+    """Aggregated counts for one OWASP category."""
+
+    name: str
+    failures: int
+    warnings: int
+    passes: int
+
+
 # OWASP LLM Top 10 definitions
 OWASP_CATEGORIES: dict[str, dict[str, str]] = {
     "LLM01": {
@@ -73,7 +88,9 @@ class OWASPMapper:
         """
         return OWASP_CATEGORIES.get(owasp_id, {"name": owasp_id, "description": ""})
 
-    def summarise_findings(self, validation_results: list[object]) -> dict[str, dict[str, object]]:
+    def summarise_findings(
+        self, validation_results: Sequence[ValidationResult]
+    ) -> dict[str, OWASPSummary]:
         """Aggregate validation results by OWASP category.
 
         Args:
@@ -82,12 +99,8 @@ class OWASPMapper:
         Returns:
             Dict keyed by OWASP ID with counts and details.
         """
-        from aegis.core.models import ValidationResult
-
-        summary: dict[str, dict[str, object]] = {}
+        summary: dict[str, OWASPSummary] = {}
         for vr in validation_results:
-            if not isinstance(vr, ValidationResult):
-                continue
             for owasp_id in vr.owasp_mappings:
                 if owasp_id not in summary:
                     info = self.get_category_info(owasp_id)
@@ -99,10 +112,10 @@ class OWASPMapper:
                     }
                 status = vr.result.value
                 if status == "FAIL":
-                    summary[owasp_id]["failures"] = int(summary[owasp_id]["failures"]) + 1
+                    summary[owasp_id]["failures"] += 1
                 elif status == "WARNING":
-                    summary[owasp_id]["warnings"] = int(summary[owasp_id]["warnings"]) + 1
+                    summary[owasp_id]["warnings"] += 1
                 else:
-                    summary[owasp_id]["passes"] = int(summary[owasp_id]["passes"]) + 1
+                    summary[owasp_id]["passes"] += 1
 
         return summary

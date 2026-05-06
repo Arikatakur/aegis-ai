@@ -4,8 +4,10 @@ from __future__ import annotations
 
 from collections.abc import Generator
 from contextlib import contextmanager
+from typing import Any
 
 from sqlalchemy import create_engine, event
+from sqlalchemy.engine import Engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
 
@@ -13,8 +15,8 @@ class Base(DeclarativeBase):
     """Declarative base for all ORM models."""
 
 
-_engine = None
-_SessionFactory: sessionmaker | None = None
+_engine: Engine | None = None
+_SessionFactory: sessionmaker[Session] | None = None
 
 
 def _get_database_url() -> str:
@@ -27,12 +29,12 @@ def _get_database_url() -> str:
         return "sqlite:///aegis.db"
 
 
-def get_engine() -> object:
+def get_engine() -> Engine:
     """Return (or create) the SQLAlchemy engine."""
     global _engine
     if _engine is None:
         url = _get_database_url()
-        connect_args = {}
+        connect_args: dict[str, Any] = {}
         if url.startswith("sqlite"):
             connect_args["check_same_thread"] = False
         _engine = create_engine(url, connect_args=connect_args, echo=False)
@@ -41,15 +43,15 @@ def get_engine() -> object:
         if url.startswith("sqlite"):
 
             @event.listens_for(_engine, "connect")
-            def set_wal(dbapi_conn: object, _: object) -> None:
-                cursor = dbapi_conn.cursor()  # type: ignore[union-attr]
+            def set_wal(dbapi_conn: Any, _: object) -> None:
+                cursor = dbapi_conn.cursor()
                 cursor.execute("PRAGMA journal_mode=WAL")
                 cursor.close()
 
     return _engine
 
 
-def get_session_factory() -> sessionmaker:
+def get_session_factory() -> sessionmaker[Session]:
     """Return (or create) the session factory."""
     global _SessionFactory
     if _SessionFactory is None:
