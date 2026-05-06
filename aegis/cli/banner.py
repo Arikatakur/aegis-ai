@@ -2,7 +2,8 @@
 
 from aegis import __version__
 
-BANNER = rf"""
+BANNER = (
+    rf"""
 [bold red]
     █████╗ ███████╗ ██████╗ ██╗███████╗
    ██╔══██╗██╔════╝██╔════╝ ██║██╔════╝
@@ -14,10 +15,13 @@ BANNER = rf"""
 
 [bold white]      Autonomous LLM Red-Teaming Platform[/bold white]
 [dim]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/dim]
-[bold red]      v{__version__}[/bold red] [dim]|[/dim] [cyan]Local-first[/cyan]
-[dim]      |[/dim] [magenta]OWASP-mapped[/magenta]
 """
+    f"[bold red]      v{__version__}[/bold red] [dim]|[/dim] "
+    "[cyan]Local-first[/cyan] [dim]|[/dim] "
+    "[magenta]OWASP-mapped[/magenta]\n"
+)
 
 BANNER_SHORT = (
-    f"[bold red]AEGIS AI[/bold red] [dim]v{__version__} | Autonomous LLM Red-Teaming Platform[/dim]"
+    f"[bold red]AEGIS AI[/bold red] "
+    f"[dim]v{__version__} | Autonomous LLM Red-Teaming Platform[/dim]"
 )
