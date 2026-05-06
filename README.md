@@ -1,17 +1,16 @@
 # Aegis AI
 
-```
-    _          _  ___   ___
-   /_\   ___  (_)/ __| |_ _|
-  / _ \ / -_) | |\__ \  | |
- /_/ \_\\___|_|_||___/ |___|
+<div align="center">
 
- Autonomous LLM Red-Teaming Platform
- ────────────────────────────────────────
- v0.1.0  |  Local-first  |  OWASP-mapped
-```
+![Aegis AI Demo](assets/screenshot.png)
 
-**Autonomous, local-first LLM red-teaming CLI for AI security testing, OWASP-mapped vulnerability assessment, and professional report generation.**
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
+![FastAPI](https://img.shields.io/badge/API-FastAPI-green)
+![CLI](https://img.shields.io/badge/CLI-Typer%20%2B%20Rich-purple)
+![License](https://img.shields.io/badge/License-Apache%202.0-red)
+![Status](https://img.shields.io/badge/Status-v0.1.0-orange)
+
+</div>
 
 ---
 
