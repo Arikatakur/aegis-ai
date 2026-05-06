@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel
 
@@ -34,5 +34,5 @@ class JobStatus(BaseModel):
     job_id: str
     status: str  # pending, running, completed, failed
     progress_pct: float = 0.0
-    result: Optional[dict[str, Any]] = None
-    error: Optional[str] = None
+    result: dict[str, Any] | None = None
+    error: str | None = None

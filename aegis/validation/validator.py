@@ -62,9 +62,7 @@ class Validator:
             dominant = rule
 
         # Merge evidence
-        combined_evidence = "; ".join(
-            filter(None, [rule.evidence, judge.evidence])
-        )
+        combined_evidence = "; ".join(filter(None, [rule.evidence, judge.evidence]))
         # Merge OWASP
         combined_owasp = sorted(set(rule.owasp_mappings + judge.owasp_mappings))
 

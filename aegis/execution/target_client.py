@@ -31,7 +31,7 @@ class TargetClient:
     Supports OpenAI-compatible API format. Never logs API keys.
     """
 
-    def __init__(self, config: "TargetConfig") -> None:
+    def __init__(self, config: TargetConfig) -> None:
         self.config = config
         self._client: httpx.AsyncClient | None = None
 
@@ -67,9 +67,7 @@ class TargetClient:
         try:
             response = await client.post(self.config.endpoint, json=payload)
         except httpx.ConnectError as exc:
-            raise TargetDownError(
-                f"Cannot reach target at {self.config.endpoint}: {exc}"
-            ) from exc
+            raise TargetDownError(f"Cannot reach target at {self.config.endpoint}: {exc}") from exc
         except httpx.TimeoutException as exc:
             raise TargetDownError(f"Request timed out: {exc}") from exc
 
@@ -80,9 +78,7 @@ class TargetClient:
             raise RateLimitError("Rate limit exceeded", retry_after=retry_after)
 
         if response.status_code >= 500:
-            raise InvalidTargetResponseError(
-                f"Target returned server error {response.status_code}"
-            )
+            raise InvalidTargetResponseError(f"Target returned server error {response.status_code}")
 
         try:
             data = response.json()
@@ -121,10 +117,7 @@ class TargetClient:
 
         if "choices" in data:
             choice = data["choices"][0] if data["choices"] else {}
-            response_text = (
-                choice.get("message", {}).get("content", "")
-                or choice.get("text", "")
-            )
+            response_text = choice.get("message", {}).get("content", "") or choice.get("text", "")
             usage = data.get("usage", {})
             prompt_tokens = usage.get("prompt_tokens", 0)
             completion_tokens = usage.get("completion_tokens", 0)
@@ -137,10 +130,9 @@ class TargetClient:
         else:
             response_text = str(data)
 
-        estimated_cost = (
-            (prompt_tokens / 1000) * _COST_PER_1K_PROMPT
-            + (completion_tokens / 1000) * _COST_PER_1K_COMPLETION
-        )
+        estimated_cost = (prompt_tokens / 1000) * _COST_PER_1K_PROMPT + (
+            completion_tokens / 1000
+        ) * _COST_PER_1K_COMPLETION
 
         return AttackResult(
             attack_id=case.attack_id,
@@ -161,7 +153,7 @@ class TargetClient:
         if self._client and not self._client.is_closed:
             await self._client.aclose()
 
-    async def __aenter__(self) -> "TargetClient":
+    async def __aenter__(self) -> TargetClient:
         return self
 
     async def __aexit__(self, *_: object) -> None:

@@ -63,7 +63,7 @@ class MockTargetClient:
     async def close(self) -> None:
         """No-op for interface compatibility."""
 
-    async def __aenter__(self) -> "MockTargetClient":
+    async def __aenter__(self) -> MockTargetClient:
         return self
 
     async def __aexit__(self, *_: Any) -> None:

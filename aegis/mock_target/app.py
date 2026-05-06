@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -16,7 +16,7 @@ class ChatRequest(BaseModel):
 
     message: str
     history: list[dict[str, Any]] = []
-    model: Optional[str] = None
+    model: str | None = None
 
 
 class TokenUsage(BaseModel):

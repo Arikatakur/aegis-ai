@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
 from typer.testing import CliRunner
 
 from aegis.cli.app import app
@@ -16,7 +15,11 @@ runner = CliRunner()
 def test_app_no_args() -> None:
     """Running without args should show help."""
     result = runner.invoke(app, [])
-    assert result.exit_code == 0 or "--help" in result.output.lower() or "usage" in result.output.lower()
+    assert (
+        result.exit_code == 0
+        or "--help" in result.output.lower()
+        or "usage" in result.output.lower()
+    )
 
 
 def test_help_flag() -> None:

@@ -5,10 +5,9 @@ from __future__ import annotations
 import asyncio
 import json
 from pathlib import Path
-from typing import Optional
 
 import typer
-from rich.prompt import Confirm, Prompt
+from rich.prompt import Prompt
 
 from aegis.cli.output import console, print_banner, print_error, print_phase, print_summary
 from aegis.config.target_config import TargetConfig
@@ -53,17 +52,17 @@ def init_command() -> None:
 
 @app.command("run")
 def run_command(
-    target: Optional[str] = typer.Option(None, "--target", "-t", help="Target endpoint URL"),
+    target: str | None = typer.Option(None, "--target", "-t", help="Target endpoint URL"),
     mode: str = typer.Option("standard", "--mode", "-m", help="Run mode: quick, standard, deep"),
     concurrency: int = typer.Option(5, "--concurrency", "-c", help="Max concurrent requests"),
-    categories: Optional[str] = typer.Option(
+    categories: str | None = typer.Option(
         None, "--categories", help="Comma-separated attack categories"
     ),
-    format: str = typer.Option("markdown", "--format", "-f", help="Report format: markdown, json, txt"),
-    output: Optional[str] = typer.Option(None, "--output", "-o", help="Output directory"),
-    config_file: Optional[str] = typer.Option(
-        None, "--config", help="Path to target config JSON"
+    format: str = typer.Option(
+        "markdown", "--format", "-f", help="Report format: markdown, json, txt"
     ),
+    output: str | None = typer.Option(None, "--output", "-o", help="Output directory"),
+    config_file: str | None = typer.Option(None, "--config", help="Path to target config JSON"),
 ) -> None:
     """[bold]Run[/bold] a full red-team assessment against the target LLM."""
     print_banner()
@@ -150,8 +149,7 @@ def replay_command(
 
     # TODO: Re-execute attack cases from stored prompts
     console.print(
-        "[yellow]Replay execution not yet implemented. "
-        "Showing stored results instead.[/yellow]"
+        "[yellow]Replay execution not yet implemented. Showing stored results instead.[/yellow]"
     )
     for f in findings:
         status = f.get("validation_status", "UNKNOWN")
@@ -247,10 +245,10 @@ def validate_config_command(
 
 
 def _load_target_config(
-    target: Optional[str],
+    target: str | None,
     concurrency: int,
     mode: str,
-    config_file: Optional[str],
+    config_file: str | None,
 ) -> TargetConfig:
     """Load TargetConfig from file, env, or CLI flags."""
     from aegis.config import get_settings

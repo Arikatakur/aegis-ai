@@ -27,7 +27,7 @@ class Pipeline:
         6. report  - Export findings
     """
 
-    def __init__(self, target_config: "TargetConfig", session: Session) -> None:
+    def __init__(self, target_config: TargetConfig, session: Session) -> None:
         self.target_config = target_config
         self.session = session
         self.context: ContextManager = session.context
@@ -122,8 +122,8 @@ class Pipeline:
     async def _phase_report(self, risk_score: float) -> str:
         """Phase 6: Report generation."""
         logger.info("[Phase 6/6] Report")
-        from aegis.reporting.report_builder import ReportBuilder
         from aegis.reporting.export import export_json, export_markdown, export_txt
+        from aegis.reporting.report_builder import ReportBuilder
 
         builder = ReportBuilder(
             session=self.session,

@@ -34,9 +34,9 @@ class ReportBuilder:
 
     def __init__(
         self,
-        session: "Session",
-        context: "ContextManager",
-        target_config: "TargetConfig",
+        session: Session,
+        context: ContextManager,
+        target_config: TargetConfig,
         risk_score: float = 0.0,
     ) -> None:
         self.session = session
@@ -57,9 +57,7 @@ class ReportBuilder:
         scorer = RiskScoring()
         risk_level = scorer.get_level(self.risk_score)
 
-        owasp_summary = self.owasp_mapper.summarise_findings(
-            self.context.validation_results
-        )
+        owasp_summary = self.owasp_mapper.summarise_findings(self.context.validation_results)
 
         findings = self._build_findings()
 
@@ -77,9 +75,7 @@ class ReportBuilder:
                 "api_key": "[REDACTED]",
                 "mode": self.target_config.mode,
             },
-            "executive_summary": self._executive_summary(
-                ctx_summary, risk_level
-            ),
+            "executive_summary": self._executive_summary(ctx_summary, risk_level),
             "risk": {
                 "score": self.risk_score,
                 "level": risk_level,
@@ -96,9 +92,7 @@ class ReportBuilder:
         # Scrub any accidentally included secrets from string values
         return self._deep_scrub(report)
 
-    def _executive_summary(
-        self, ctx_summary: dict[str, Any], risk_level: str
-    ) -> str:
+    def _executive_summary(self, ctx_summary: dict[str, Any], risk_level: str) -> str:
         return (
             f"Aegis AI conducted an automated red-team assessment against "
             f"{self.target_config.endpoint} using the {self.target_config.model} model. "
@@ -132,9 +126,7 @@ class ReportBuilder:
             findings.append(finding)
         return findings
 
-    def _recommendations(
-        self, risk_level: str, owasp_summary: dict[str, Any]
-    ) -> list[str]:
+    def _recommendations(self, risk_level: str, owasp_summary: dict[str, Any]) -> list[str]:
         """Generate recommendations based on risk level and OWASP findings."""
         recs = []
         if "LLM01" in owasp_summary:
@@ -171,9 +163,15 @@ class ReportBuilder:
 
     def _risk_description(self, risk_level: str) -> str:
         descriptions = {
-            "Critical": "The system is critically vulnerable and must not be deployed without immediate remediation.",
+            "Critical": (
+                "The system is critically vulnerable and must not be deployed without "
+                "immediate remediation."
+            ),
             "High": "The system has significant security weaknesses requiring urgent attention.",
-            "Medium": "The system shows moderate vulnerabilities that should be addressed before wide deployment.",
+            "Medium": (
+                "The system shows moderate vulnerabilities that should be addressed before "
+                "wide deployment."
+            ),
             "Low": "The system appears relatively robust but continuous monitoring is recommended.",
         }
         return descriptions.get(risk_level, "")

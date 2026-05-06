@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, patch
 
 import pytest
 
@@ -68,9 +68,7 @@ async def test_execute_batch_returns_results(
         assert isinstance(result, AttackResult)
 
 
-async def test_execute_empty_batch(
-    target_config: TargetConfig, context: ContextManager
-) -> None:
+async def test_execute_empty_batch(target_config: TargetConfig, context: ContextManager) -> None:
     """execute_batch with empty list should return empty list."""
     executor = AsyncExecutor(
         target_config=target_config,
@@ -132,20 +130,17 @@ async def test_executor_concurrency_limit(
                 response="ok",
             )
 
-        async def __aenter__(self) -> "CountingMockClient":
+        async def __aenter__(self) -> CountingMockClient:
             return self
 
         async def __aexit__(self, *_: object) -> None:
             pass
 
     target_config_2 = TargetConfig(concurrency=2)
-    executor = AsyncExecutor(
-        target_config=target_config_2, context=context, concurrency=2
-    )
+    executor = AsyncExecutor(target_config=target_config_2, context=context, concurrency=2)
 
     cases = [
-        AttackCase(attack_id=f"c-{i}", agent_name="t", category="t", prompt="p")
-        for i in range(6)
+        AttackCase(attack_id=f"c-{i}", agent_name="t", category="t", prompt="p") for i in range(6)
     ]
 
     counting_client = CountingMockClient()

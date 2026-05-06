@@ -13,8 +13,6 @@ from aegis.core.session import Session
 from aegis.reporting.export import export_json, export_markdown, export_txt
 from aegis.reporting.report_builder import ReportBuilder, _scrub_secrets
 from tests.mocks.mock_responses import (
-    ALL_FAIL_RESULTS,
-    ALL_PASS_RESULTS,
     ALL_RESULTS,
     VALIDATION_FAIL_OVERRIDE,
     VALIDATION_FAIL_SYSTEM_PROMPT,
@@ -47,7 +45,12 @@ async def populated_context() -> ContextManager:
     )
     for result in ALL_RESULTS:
         await context.add_attack_result(result)
-    for vr in [VALIDATION_PASS, VALIDATION_FAIL_SYSTEM_PROMPT, VALIDATION_FAIL_OVERRIDE, VALIDATION_WARNING]:
+    for vr in [
+        VALIDATION_PASS,
+        VALIDATION_FAIL_SYSTEM_PROMPT,
+        VALIDATION_FAIL_OVERRIDE,
+        VALIDATION_WARNING,
+    ]:
         await context.add_validation_result(vr)
     return context
 

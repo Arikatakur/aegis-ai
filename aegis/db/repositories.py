@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 from datetime import datetime
-from typing import Any
 
 from sqlalchemy.orm import Session
 
@@ -42,19 +41,11 @@ class SessionRepository:
 
     def get(self, session_id: str) -> DBSession | None:
         """Return a session by session_id."""
-        return (
-            self.db.query(DBSession)
-            .filter(DBSession.session_id == session_id)
-            .first()
-        )
+        return self.db.query(DBSession).filter(DBSession.session_id == session_id).first()
 
     def list_all(self) -> list[DBSession]:
         """Return all sessions ordered by started_at descending."""
-        return (
-            self.db.query(DBSession)
-            .order_by(DBSession.started_at.desc())
-            .all()
-        )
+        return self.db.query(DBSession).order_by(DBSession.started_at.desc()).all()
 
     def update_status(self, session_id: str, status: str) -> None:
         """Update session status."""
@@ -99,19 +90,11 @@ class AttackRepository:
 
     def list_for_session(self, session_id: str) -> list[DBAttackResult]:
         """Return all attack results for a session."""
-        return (
-            self.db.query(DBAttackResult)
-            .filter(DBAttackResult.session_id == session_id)
-            .all()
-        )
+        return self.db.query(DBAttackResult).filter(DBAttackResult.session_id == session_id).all()
 
     def get(self, attack_id: str) -> DBAttackResult | None:
         """Return an attack result by attack_id."""
-        return (
-            self.db.query(DBAttackResult)
-            .filter(DBAttackResult.attack_id == attack_id)
-            .first()
-        )
+        return self.db.query(DBAttackResult).filter(DBAttackResult.attack_id == attack_id).first()
 
 
 class ValidationRepository:
@@ -165,11 +148,7 @@ class ReportRepository:
 
     def list_for_session(self, session_id: str) -> list[DBReport]:
         """Return all reports for a session."""
-        return (
-            self.db.query(DBReport)
-            .filter(DBReport.session_id == session_id)
-            .all()
-        )
+        return self.db.query(DBReport).filter(DBReport.session_id == session_id).all()
 
     def get_latest(self, session_id: str, fmt: str) -> DBReport | None:
         """Return the latest report of a given format for a session."""

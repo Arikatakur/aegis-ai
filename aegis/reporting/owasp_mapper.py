@@ -14,9 +14,7 @@ OWASP_CATEGORIES: dict[str, dict[str, str]] = {
     },
     "LLM02": {
         "name": "Sensitive Information Disclosure",
-        "description": (
-            "The LLM reveals sensitive or confidential information it should not."
-        ),
+        "description": ("The LLM reveals sensitive or confidential information it should not."),
         "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
     },
     "LLM04": {
@@ -29,16 +27,12 @@ OWASP_CATEGORIES: dict[str, dict[str, str]] = {
     },
     "LLM07": {
         "name": "System Prompt Leakage",
-        "description": (
-            "The system prompt or hidden instructions are exposed to the user."
-        ),
+        "description": ("The system prompt or hidden instructions are exposed to the user."),
         "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
     },
     "LLM10": {
         "name": "Unbounded Consumption",
-        "description": (
-            "Excessive token usage leading to denial-of-service or unexpected costs."
-        ),
+        "description": ("Excessive token usage leading to denial-of-service or unexpected costs."),
         "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
     },
 }
@@ -79,9 +73,7 @@ class OWASPMapper:
         """
         return OWASP_CATEGORIES.get(owasp_id, {"name": owasp_id, "description": ""})
 
-    def summarise_findings(
-        self, validation_results: list[object]
-    ) -> dict[str, dict[str, object]]:
+    def summarise_findings(self, validation_results: list[object]) -> dict[str, dict[str, object]]:
         """Aggregate validation results by OWASP category.
 
         Args:

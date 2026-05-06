@@ -23,7 +23,7 @@
 - **Local-first** — no cloud dependency; SQLite persistence, local report generation
 - **Professional reports** — Markdown, JSON, TXT exports with risk scoring
 - **Mock target included** — test against a built-in vulnerable/secure LLM server
-- **REST API (V5)** — FastAPI server for programmatic access
+- **REST API** — FastAPI server for programmatic access
 
 ---
 

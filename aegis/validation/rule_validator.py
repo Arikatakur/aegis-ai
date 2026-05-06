@@ -85,8 +85,10 @@ class RuleValidator:
                     status = ValidationStatus.WARNING
 
         evidence = "; ".join(findings) if findings else "No suspicious patterns detected."
-        confidence = 0.9 if status == ValidationStatus.FAIL else (
-            0.6 if status == ValidationStatus.WARNING else 0.85
+        confidence = (
+            0.9
+            if status == ValidationStatus.FAIL
+            else (0.6 if status == ValidationStatus.WARNING else 0.85)
         )
 
         return ValidationResult(

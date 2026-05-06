@@ -25,7 +25,7 @@ class PlannerAgent:
     Requires a configured judge/planner model.
     """
 
-    def __init__(self, context: "ContextManager", gateway: "LLMGateway") -> None:
+    def __init__(self, context: ContextManager, gateway: LLMGateway) -> None:
         self.context = context
         self.gateway = gateway
 

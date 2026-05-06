@@ -5,7 +5,6 @@ from __future__ import annotations
 import pytest
 
 from aegis.config.target_config import TargetConfig
-from aegis.core.exceptions import ConfigurationError
 
 
 def test_target_config_defaults() -> None:

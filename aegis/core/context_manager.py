@@ -53,9 +53,7 @@ class ContextManager:
         """Append a validation result and track pass/fail patterns."""
         async with self._lock:
             self.validation_results.append(result)
-            attack = next(
-                (a for a in self.attack_results if a.attack_id == result.attack_id), None
-            )
+            attack = next((a for a in self.attack_results if a.attack_id == result.attack_id), None)
             if attack:
                 if result.result.value == "FAIL":
                     self.failed_patterns.append(attack.prompt[:100])

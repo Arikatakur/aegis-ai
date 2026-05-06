@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import random
-import re
 
 # Fake system prompt that the vulnerable target may leak
 FAKE_SYSTEM_PROMPT = (
@@ -117,10 +116,7 @@ class ScenarioEngine:
                 return random.choice(_VULNERABLE_COMPLIANCES)
 
             # Vulnerable but not obviously triggered - still compliant
-            return (
-                "I'm happy to help! "
-                + self._benign_response(lower_msg)
-            )
+            return "I'm happy to help! " + self._benign_response(lower_msg)
 
         else:  # secure
             # Check for any suspicious content

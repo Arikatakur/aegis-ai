@@ -1,4 +1,4 @@
-"""Top-level Aegis AI configuration - delegates to aegis.config.settings (V5)."""
+"""Top-level Aegis AI configuration - delegates to aegis.config.settings."""
 
 from aegis.config.settings import Settings, get_settings
 

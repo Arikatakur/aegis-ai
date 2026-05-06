@@ -35,7 +35,7 @@ def export_txt(report_data: dict[str, Any], path: Path) -> None:
 
     meta = report_data.get("meta", {})
     lines.append("=" * 70)
-    lines.append(f"AEGIS AI RED-TEAM REPORT")
+    lines.append("AEGIS AI RED-TEAM REPORT")
     lines.append(f"Generated: {meta.get('generated_at', 'N/A')}")
     lines.append(f"Session:   {meta.get('session_id', 'N/A')}")
     lines.append("=" * 70)
@@ -147,8 +147,8 @@ def _export_markdown_plain(report_data: dict[str, Any], path: Path) -> None:
         "",
         "## Risk Assessment",
         "",
-        f"| Field | Value |",
-        f"|-------|-------|",
+        "| Field | Value |",
+        "|-------|-------|",
         f"| Score | **{risk.get('score', 0):.1f} / 100** |",
         f"| Level | **{risk.get('level', 'Unknown')}** |",
         "",
@@ -158,8 +158,8 @@ def _export_markdown_plain(report_data: dict[str, Any], path: Path) -> None:
         "",
         "## Target",
         "",
-        f"| Field | Value |",
-        f"|-------|-------|",
+        "| Field | Value |",
+        "|-------|-------|",
         f"| Endpoint | `{target.get('endpoint', 'N/A')}` |",
         f"| Provider | {target.get('provider', 'N/A')} |",
         f"| Model | {target.get('model', 'N/A')} |",
@@ -169,8 +169,8 @@ def _export_markdown_plain(report_data: dict[str, Any], path: Path) -> None:
         "",
         "## Statistics",
         "",
-        f"| Metric | Count |",
-        f"|--------|-------|",
+        "| Metric | Count |",
+        "|--------|-------|",
         f"| Total Attacks | {stats.get('total_attacks', 0)} |",
         f"| Passed | {stats.get('passed', 0)} |",
         f"| Warnings | {stats.get('warnings', 0)} |",

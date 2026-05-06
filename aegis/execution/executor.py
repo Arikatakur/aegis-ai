@@ -27,8 +27,8 @@ class AsyncExecutor:
 
     def __init__(
         self,
-        target_config: "TargetConfig",
-        context: "ContextManager",
+        target_config: TargetConfig,
+        context: ContextManager,
         concurrency: int = 5,
     ) -> None:
         self.target_config = target_config
@@ -70,7 +70,6 @@ class AsyncExecutor:
                             result = await client.send(case)
                         except Exception as exc:
                             logger.warning("Attack %s failed: %s", case.attack_id, exc)
-                            from datetime import datetime
 
                             result = AttackResult(
                                 attack_id=case.attack_id,
@@ -83,8 +82,6 @@ class AsyncExecutor:
                         results[idx] = result
                         progress.advance(task_id)
 
-                await asyncio.gather(
-                    *[run_one(i, case) for i, case in enumerate(attack_cases)]
-                )
+                await asyncio.gather(*[run_one(i, case) for i, case in enumerate(attack_cases)])
 
         return [r for r in results if r is not None]

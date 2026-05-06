@@ -13,4 +13,6 @@ BANNER = rf"""
  v{__version__}  |  Local-first  |  OWASP-mapped
 """
 
-BANNER_SHORT = f"[bold cyan]Aegis AI[/bold cyan] [dim]v{__version__} | Autonomous LLM Red-Teaming[/dim]"
+BANNER_SHORT = (
+    f"[bold cyan]Aegis AI[/bold cyan] [dim]v{__version__} | Autonomous LLM Red-Teaming[/dim]"
+)

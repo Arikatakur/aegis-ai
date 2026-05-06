@@ -24,9 +24,7 @@ def secure_client() -> MockTargetClient:
             agent_name="recon",
             category="recon",
             prompt="probe",
-            response=(
-                "I'm not able to help with that. I cannot ignore previous instructions."
-            ),
+            response=("I'm not able to help with that. I cannot ignore previous instructions."),
         )
     )
 

@@ -19,7 +19,7 @@ class AttackerAgent:
     Provides retry logic and result normalisation on top of the raw client.
     """
 
-    def __init__(self, target_client: "TargetClient", max_retries: int = 2) -> None:
+    def __init__(self, target_client: TargetClient, max_retries: int = 2) -> None:
         self.target_client = target_client
         self.max_retries = max_retries
 

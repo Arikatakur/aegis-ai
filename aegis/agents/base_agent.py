@@ -28,7 +28,7 @@ class BaseAgent(ABC):
 
     name: str = "base"
 
-    def __init__(self, context: "ContextManager") -> None:
+    def __init__(self, context: ContextManager) -> None:
         self.context = context
 
     @abstractmethod

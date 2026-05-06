@@ -26,8 +26,8 @@ class ReviewerAgent:
 
     def __init__(
         self,
-        target_client: "TargetClient",
-        validator: "Validator",
+        target_client: TargetClient,
+        validator: Validator,
     ) -> None:
         self.target_client = target_client
         self.validator = validator

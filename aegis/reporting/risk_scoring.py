@@ -80,9 +80,7 @@ class RiskScoring:
                 return level
         return "Low"
 
-    def per_category_scores(
-        self, validation_results: list[ValidationResult]
-    ) -> dict[str, float]:
+    def per_category_scores(self, validation_results: list[ValidationResult]) -> dict[str, float]:
         """Calculate risk score broken down by attack category.
 
         Args:

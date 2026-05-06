@@ -35,7 +35,7 @@ class AttackPlanner:
     Applies mode-based filters so quick runs stay fast.
     """
 
-    def __init__(self, context: "ContextManager") -> None:
+    def __init__(self, context: ContextManager) -> None:
         self.context = context
 
     async def plan(self, mode: str = "standard") -> list[AttackCase]:
