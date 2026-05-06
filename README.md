@@ -8,7 +8,7 @@
 ![FastAPI](https://img.shields.io/badge/API-FastAPI-green)
 ![CLI](https://img.shields.io/badge/CLI-Typer%20%2B%20Rich-purple)
 ![License](https://img.shields.io/badge/License-Apache%202.0-red)
-![Status](https://img.shields.io/badge/Status-v0.1.2-orange)
+![Status](https://img.shields.io/badge/Status-v0.1.3-orange)
 
 </div>
 
