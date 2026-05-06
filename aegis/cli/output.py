@@ -16,7 +16,7 @@ console = Console()
 
 def print_banner() -> None:
     """Print the Aegis AI ASCII banner."""
-    console.print(f"[bold cyan]{BANNER}[/bold cyan]")
+    console.print(BANNER, justify="center")
 
 
 def print_phase(name: str, status: str) -> None:

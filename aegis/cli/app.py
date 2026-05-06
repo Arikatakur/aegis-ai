@@ -6,15 +6,27 @@ import asyncio
 import json
 from pathlib import Path
 
+import click
 import typer
 from rich.prompt import Prompt
+from typer.core import TyperGroup
 
 from aegis.cli.output import console, print_banner, print_error, print_phase, print_summary
 from aegis.config.target_config import TargetConfig
 from aegis.core.models import SessionSummary
 
+
+class AegisHelpGroup(TyperGroup):
+    """Root command group that brands the generated help screen."""
+
+    def format_help(self, ctx: click.Context, formatter: click.HelpFormatter) -> None:
+        print_banner()
+        super().format_help(ctx, formatter)
+
+
 app = typer.Typer(
     name="aegis",
+    cls=AegisHelpGroup,
     help="Aegis AI - Autonomous LLM Red-Teaming Platform",
     no_args_is_help=True,
     rich_markup_mode="rich",
@@ -161,10 +173,11 @@ def replay_command(
 def list_sessions_command() -> None:
     """[bold]List[/bold] all past sessions stored in the database."""
     print_banner()
-    from aegis.db.database import get_session_factory
+    from aegis.db.database import get_session_factory, init_db
     from aegis.db.repositories import SessionRepository
 
     try:
+        init_db()
         session_factory = get_session_factory()
         with session_factory() as db:
             repo = SessionRepository(db)

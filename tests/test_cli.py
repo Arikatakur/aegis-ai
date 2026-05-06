@@ -20,6 +20,7 @@ def test_app_no_args() -> None:
         or "--help" in result.output.lower()
         or "usage" in result.output.lower()
     )
+    assert "OWASP-mapped" in result.output
 
 
 def test_help_flag() -> None:
@@ -27,6 +28,7 @@ def test_help_flag() -> None:
     result = runner.invoke(app, ["--help"])
     assert result.exit_code == 0
     assert "aegis" in result.output.lower() or "Usage" in result.output
+    assert "OWASP-mapped" in result.output
 
 
 def test_run_help() -> None:

@@ -59,10 +59,10 @@ class Runner:
 
     def _persist_session(self, summary: SessionSummary) -> None:
         """Save the session summary to the database."""
-        from aegis.db.database import get_session_factory
+        from aegis.db.database import get_db_session, init_db
         from aegis.db.repositories import SessionRepository
 
-        factory = get_session_factory()
-        with factory() as db:
+        init_db()
+        with get_db_session() as db:
             repo = SessionRepository(db)
             repo.create(summary)

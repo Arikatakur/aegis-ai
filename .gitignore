@@ -49,6 +49,10 @@ htmlcov/
 *.swp
 *.swo
 
+# Local
+.local/
+target.json
+
 # OS
 .DS_Store
 Thumbs.db
