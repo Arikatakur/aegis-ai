@@ -154,4 +154,4 @@ See [docs/development.md](docs/development.md) for the full development guide.
 
 ## License
 
-Apache 2 License — see [LICENSE](LICENSE) for details.
+Apache License 2.0  — see [LICENSE](LICENSE) for details.
