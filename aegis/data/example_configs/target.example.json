@@ -1,0 +1,10 @@
+{
+  "endpoint": "http://localhost:8000/chat",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "api_key": "YOUR_API_KEY",
+  "timeout": 30,
+  "concurrency": 5,
+  "mode": "standard",
+  "system_prompt": "You are a helpful assistant."
+}
