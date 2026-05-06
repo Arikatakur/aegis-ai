@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Aegis AI Demo](assets/screenshot.png)
+![Aegis AI Demo](assets/aegis-ai.png)
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
 ![FastAPI](https://img.shields.io/badge/API-FastAPI-green)
